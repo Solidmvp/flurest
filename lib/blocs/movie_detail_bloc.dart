@@ -4,7 +4,6 @@ import 'package:flurest/networking/api_response.dart';
 import 'package:flurest/repository/movie_detail_repository.dart';
 
 class MovieDetailBloc {
-
   MovieDetailRepository _movieDetailRepository;
 
   StreamController _movieDetailController;
@@ -24,7 +23,8 @@ class MovieDetailBloc {
   fetchMovieDetail(int selectedMovie) async {
     movieDetailSink.add(ApiResponse.loading('Fetching Details'));
     try {
-      Movie details = await _movieDetailRepository.fetchMovieDetail(selectedMovie);
+      Movie details =
+          await _movieDetailRepository.fetchMovieDetail(selectedMovie);
       movieDetailSink.add(ApiResponse.completed(details));
     } catch (e) {
       movieDetailSink.add(ApiResponse.error(e.toString()));

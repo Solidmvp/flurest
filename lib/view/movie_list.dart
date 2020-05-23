@@ -87,8 +87,7 @@ class MovieList extends StatelessWidget {
           child: InkWell(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) =>
-                      MovieDetail(movieList[index].id)));
+                  builder: (context) => MovieDetail(movieList[index].id)));
             },
             child: Card(
               child: Padding(
@@ -135,7 +134,7 @@ class Error extends StatelessWidget {
               'Retry',
               style: TextStyle(
 //                color: Colors.white,
-              ),
+                  ),
             ),
             onPressed: onRetryPressed,
           )

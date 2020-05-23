@@ -18,10 +18,5 @@ jobs:
           flutter-version: '1.17'
           channel: 'stable'
       - run: flutter pub get
-#      - shell: bash
-#        env:
-#          api_key: ${{ secrets.api_key }}
-#        run: |
-#          echo "String apiKey = $api_key;" > ./lib/apiKey.dart
       - run: flutter analyze --no-pub
       - run: flutter format lib/** --set-exit-if-changed
