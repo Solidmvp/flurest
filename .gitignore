@@ -45,3 +45,6 @@ app.*.map.json
 #apiKeys and config
 apiKey.dart
 config.dart
+
+#test
+test/
