@@ -38,11 +38,11 @@ jobs:
           channel: 'stable'
       - run: flutter pub get
       - shell: bash
-          env:
-            SUPER_SECRET: ${{ secrets.api_key }}
-          run: |
-            cd lib
-            echo "String apiKey = $SUPER_SECRET" > apiKey.dart
+        env:
+          SUPER_SECRET: ${{ secrets.api_key }}
+        run: |
+          cd lib
+          echo "String apiKey = $SUPER_SECRET" > apiKey.dart
       - run: |
           flutter build apk
           mv build/app/outputs/apk/release/app-release.apk build/app/outputs/apk/release/app-master.apk
@@ -65,11 +65,11 @@ jobs:
           channel: 'stable'
       - run: flutter pub get
       - shell: bash
-          env:
-            SUPER_SECRET: ${{ secrets.api_key }}
-          run: |
-            cd lib
-            echo "String apiKey = $SUPER_SECRET" > apiKey.dart
+        env:
+          SUPER_SECRET: ${{ secrets.api_key }}
+        run: |
+          cd lib
+          echo "String apiKey = $SUPER_SECRET" > apiKey.dart
       - run: |
           flutter build apk
           mv build/app/outputs/apk/release/app-release.apk build/app/outputs/apk/release/app-pr.apk
