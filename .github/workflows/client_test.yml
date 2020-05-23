@@ -18,5 +18,11 @@ jobs:
           flutter-version: '1.17'
           channel: 'stable'
       - run: flutter pub get
+      - shell: bash
+        env:
+          SUPER_SECRET: ${{ secrets.api_key }}
+        run: |
+          cd lib
+          echo "String apiKey = $SUPER_SECRET" > apiKey.dart
       - run: flutter analyze --no-pub
       - run: flutter format lib/** --set-exit-if-changed
