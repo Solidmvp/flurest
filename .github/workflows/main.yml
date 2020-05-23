@@ -7,12 +7,13 @@ on:
 jobs:
   createfile:
     name: Create File
-    shell: bash
-    env:
-      SUPER_SECRET: ${{ secrets.api_key }}
-    run: |
-      cd lib
-      echo "String apiKey = $SUPER_SECRET" > apiKey.dart
+    steps:
+      - shell: bash
+        env:
+          SUPER_SECRET: ${{ secrets.api_key }}
+        run: |
+          cd lib
+          echo "String apiKey = $SUPER_SECRET" > apiKey.dart
   buildios:
     name: Build iOS app
     runs-on: macos-latest
