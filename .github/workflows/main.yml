@@ -20,7 +20,7 @@ jobs:
           SUPER_SECRET: ${{ secrets.api_key }}
         run: |
           cd lib
-          echo "String apiKey = $SUPER_SECRET" > apiKey.dart
+          echo "String apiKey = $SUPER_SECRET;" > apiKey.dart
       - run: flutter build ios --no-codesign
   build-master:
     name: Build master Android app
@@ -42,7 +42,7 @@ jobs:
           SUPER_SECRET: ${{ secrets.api_key }}
         run: |
           cd lib
-          echo "String apiKey = $SUPER_SECRET" > apiKey.dart
+          echo "String apiKey = $SUPER_SECRET;" > apiKey.dart
       - run: |
           flutter build apk
           mv build/app/outputs/apk/release/app-release.apk build/app/outputs/apk/release/app-master.apk
@@ -69,7 +69,7 @@ jobs:
           SUPER_SECRET: ${{ secrets.api_key }}
         run: |
           cd lib
-          echo "String apiKey = $SUPER_SECRET" > apiKey.dart
+          echo "String apiKey = $SUPER_SECRET;" > apiKey.dart
       - run: |
           flutter build apk
           mv build/app/outputs/apk/release/app-release.apk build/app/outputs/apk/release/app-pr.apk

@@ -23,6 +23,6 @@ jobs:
           SUPER_SECRET: ${{ secrets.api_key }}
         run: |
           cd lib
-          echo "String apiKey = $SUPER_SECRET" > apiKey.dart
+          echo "String apiKey = $SUPER_SECRET;" > apiKey.dart
       - run: flutter analyze --no-pub
       - run: flutter format lib/** --set-exit-if-changed
