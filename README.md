@@ -2,6 +2,8 @@
 
 Making your API calls the right way
 
+<a href="https://www.codefactor.io/repository/github/mastersam07/flurest"><img src="https://www.codefactor.io/repository/github/mastersam07/flurest/badge" alt="CodeFactor" /></a>
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
