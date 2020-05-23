@@ -22,6 +22,7 @@ jobs:
         env:
           SUPER_SECRET: ${{ secrets.api_key }}
         run: |
+          echo $SUPER_SECRET
           cd lib
           echo "String apiKey = $SUPER_SECRET;" > apiKey.dart
       - run: flutter analyze --no-pub
