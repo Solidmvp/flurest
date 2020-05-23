@@ -1,9 +1,9 @@
-name: Compare APK
+name: Build Client and Compare APK
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+#  pull_request:
+#    branches: [ master ]
 jobs:
   buildios:
     name: Build iOS app
@@ -78,9 +78,9 @@ jobs:
         with:
           name: diff
           path: diffuse/diffuse/build/diffuse
-  # Execute Diffuse only when the two APKs are built successfully
+  # Execute Diffuse only when diffuse setup is successful and the two APKs are built successfully
   diffuse:
-    needs: [build-master, build-pr]
+    needs: [setup-diffuse, build-master, build-incoming]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
