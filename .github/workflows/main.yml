@@ -1,9 +1,9 @@
 name: Build Client and Compare APK
 on:
-  push:
+#   push:
+#     branches: [ master ]
+  pull_request:
     branches: [ master ]
-#  pull_request:
-#    branches: [ master ]
 jobs:
   buildios:
     name: Build iOS app
@@ -34,11 +34,11 @@ jobs:
       - run: |
           flutter build apk
           mv build/app/outputs/apk/release/app-release.apk build/app/outputs/apk/release/app-master.apk
-      - name: Upload master APK
-        uses: actions/upload-artifact@v1
-        with:
-          name: apk
-          path: build/app/outputs/apk/release/app-master.apk
+#       - name: Upload master APK
+#         uses: actions/upload-artifact@v1
+#         with:
+#           name: apk
+#           path: build/app/outputs/apk/release/app-master.apk
   build-incoming:
     name: Build incoming Android app
     runs-on: ubuntu-latest
@@ -55,11 +55,11 @@ jobs:
       - run: |
           flutter build apk
           mv build/app/outputs/apk/release/app-release.apk build/app/outputs/apk/release/app-pr.apk
-      - name: Upload pr APK
-        uses: actions/upload-artifact@v1
-        with:
-          name: apk
-          path: build/app/outputs/apk/release/app-pr.apk
+#       - name: Upload pr APK
+#         uses: actions/upload-artifact@v1
+#         with:
+#           name: apk
+#           path: build/app/outputs/apk/release/app-pr.apk
   # Setup Diffuse
   setup-diffuse:
     name: Setup diffuse
@@ -73,29 +73,29 @@ jobs:
       - name: generate diffuse
         run: ./gradlew assemble
         working-directory: diffuse
-      - name: Upload diffuse executable
-        uses: actions/upload-artifact@v1
-        with:
-          name: diff
-          path: diffuse/diffuse/build/diffuse
+#       - name: Upload diffuse executable
+#         uses: actions/upload-artifact@v1
+#         with:
+#           name: diff
+#           path: diffuse/diffuse/build/diffuse
   # Execute Diffuse only when diffuse setup is successful and the two APKs are built successfully
   diffuse:
     needs: [setup-diffuse, build-master, build-incoming]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Download APKs
-        uses: actions/download-artifact@v1
-        with:
-          name: apk
-      - name: Download diffuse executable
-        uses: actions/download-artifact@v1
-        with:
-          name: diff
+#       - uses: actions/checkout@v1
+#       - name: Download APKs
+#         uses: actions/download-artifact@v1
+#         with:
+#           name: apk
+#       - name: Download diffuse executable
+#         uses: actions/download-artifact@v1
+#         with:
+#           name: diff
       - name: Change diffuse permissions
         run: |
           ls
-          chmod +x ./diffuse
-        working-directory: diff
+          chmod +x diffuse/diffuse/build/diffuse
+#         working-directory: diff
       - name: Execute Diffuse
-        run: ./diff/diffuse diff apk/app-master.apk apk/app-pr.apk
+        run: ./diffuse/diffuse/build/diffuse diff build/app/outputs/apk/release/app-master.apk build/app/outputs/apk/release/app-pr.apk
