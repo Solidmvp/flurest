@@ -1,6 +1,8 @@
 import 'package:flurest/blocs/movie_detail_bloc.dart';
 import 'package:flurest/models/movie_response.dart';
 import 'package:flurest/networking/api_response.dart';
+import 'package:flurest/view/loading.dart';
+import 'package:flurest/view/error.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
@@ -27,15 +29,12 @@ class _MovieDetailState extends State<MovieDetail> {
       appBar: AppBar(
         elevation: 0.0,
         title: Text(
-          'Mover',
+          'Moviez',
           style: TextStyle(
-//            color: Colors.white,
             fontSize: 20,
           ),
         ),
-//        backgroundColor: Color(0xFF333333),
       ),
-//      backgroundColor: Color(0xFF333333),
       body: RefreshIndicator(
         onRefresh: () =>
             _movieDetailBloc.fetchMovieDetail(widget.selectedMovie),
@@ -75,6 +74,7 @@ class _MovieDetailState extends State<MovieDetail> {
 
 class ShowMovieDetail extends StatelessWidget {
   final Movie displayMovie;
+  final String imgUrl = "https://image.tmdb.org/t/p/w342";
 
   ShowMovieDetail({Key key, this.displayMovie}) : super(key: key);
 
@@ -83,7 +83,7 @@ class ShowMovieDetail extends StatelessWidget {
     return new Scaffold(
       body: Stack(fit: StackFit.expand, children: [
         new Image.network(
-          'https://image.tmdb.org/t/p/w342${displayMovie.posterPath}',
+          '$imgUrl${displayMovie.posterPath}',
           fit: BoxFit.cover,
         ),
         new BackdropFilter(
@@ -107,13 +107,11 @@ class ShowMovieDetail extends StatelessWidget {
                     borderRadius: new BorderRadius.circular(10.0),
                     image: new DecorationImage(
                         image: new NetworkImage(
-                            'https://image.tmdb.org/t/p/w342${displayMovie.posterPath}'),
+                            '$imgUrl${displayMovie.posterPath}'),
                         fit: BoxFit.cover),
                     boxShadow: [
                       new BoxShadow(
-//                          color: Colors.black,
-                          blurRadius: 20.0,
-                          offset: new Offset(0.0, 10.0))
+                          blurRadius: 20.0, offset: new Offset(0.0, 10.0))
                     ],
                   ),
                 ),
@@ -197,74 +195,6 @@ class ShowMovieDetail extends StatelessWidget {
           ),
         )
       ]),
-    );
-  }
-}
-
-class Error extends StatelessWidget {
-  final String errorMessage;
-
-  final Function onRetryPressed;
-
-  const Error({Key key, this.errorMessage, this.onRetryPressed})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            errorMessage,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.red,
-              fontSize: 18,
-            ),
-          ),
-          SizedBox(height: 8),
-          RaisedButton(
-            color: Colors.redAccent,
-            child: Text(
-              'Retry',
-              style: TextStyle(
-//                color: Colors.white,
-                  ),
-            ),
-            onPressed: onRetryPressed,
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class Loading extends StatelessWidget {
-  final String loadingMessage;
-
-  const Loading({Key key, this.loadingMessage}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            loadingMessage,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-//              color: Colors.lightGreen,
-              fontSize: 24,
-            ),
-          ),
-          SizedBox(height: 24),
-          CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.lightGreen),
-          ),
-        ],
-      ),
     );
   }
 }
