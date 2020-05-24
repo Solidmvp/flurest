@@ -95,7 +95,7 @@ jobs:
       - name: Change diffuse permissions
         run: |
           ls
-          chmod +x diffuse/diffuse/build/diffuse
+          chmod +x ./diffuse/diffuse/build/diffuse
 #         working-directory: diff
       - name: Execute Diffuse
         run: ./diffuse/diffuse/build/diffuse diff build/app/outputs/apk/release/app-master.apk build/app/outputs/apk/release/app-pr.apk
