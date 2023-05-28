@@ -1,6 +1,8 @@
 import 'package:flurest/blocs/movie_bloc.dart';
 import 'package:flurest/models/movie_response.dart';
 import 'package:flurest/networking/api_response.dart';
+import 'package:flurest/view/loading.dart';
+import 'package:flurest/view/error.dart';
 import 'package:flurest/view/movie_detail.dart';
 import 'package:flutter/material.dart';
 
@@ -24,15 +26,12 @@ class _MovieScreenState extends State<MovieScreen> {
       appBar: AppBar(
         elevation: 0.0,
         title: Text(
-          'Mover',
+          'Moviez',
           style: TextStyle(
-//            color: Colors.lightGreen,
             fontSize: 28,
           ),
         ),
-//        backgroundColor: Colors.black54,
       ),
-//      backgroundColor: Colors.black54,
       body: RefreshIndicator(
         onRefresh: () => _bloc.fetchMovieList(),
         child: StreamBuilder<ApiResponse<List<Movie>>>(
@@ -101,74 +100,6 @@ class MovieList extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class Error extends StatelessWidget {
-  final String errorMessage;
-
-  final Function onRetryPressed;
-
-  const Error({Key key, this.errorMessage, this.onRetryPressed})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            errorMessage,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.red,
-              fontSize: 18,
-            ),
-          ),
-          SizedBox(height: 8),
-          RaisedButton(
-            color: Colors.redAccent,
-            child: Text(
-              'Retry',
-              style: TextStyle(
-//                color: Colors.white,
-                  ),
-            ),
-            onPressed: onRetryPressed,
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class Loading extends StatelessWidget {
-  final String loadingMessage;
-
-  const Loading({Key key, this.loadingMessage}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            loadingMessage,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-//              color: Colors.lightGreen,
-              fontSize: 24,
-            ),
-          ),
-          SizedBox(height: 24),
-          CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.lightGreen),
-          ),
-        ],
-      ),
     );
   }
 }
